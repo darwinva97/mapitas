@@ -9,7 +9,14 @@ const MapSimpleProvince = () => {
   return (
     <div className="w-full max-w-[400px]">
       <h2 className="text-center text-xl">Multiple provinces</h2>
-      <MapProvinces {...dataMap} />
+      <MapProvinces
+        {...dataMap}
+        styles={{
+          all: "red",
+          hover: "blue",
+          selected: "green",
+        }}
+      />
       <p>Provinces:</p>
       <pre className="w-[200px] h-[200px] text-sm overflow-scroll">
         {JSON.stringify(dataMap.province, null, 2)}
@@ -23,7 +30,14 @@ const MapMultipleProvinces = () => {
   return (
     <div className="w-full max-w-[400px]">
       <h2 className="text-center text-xl">Multiple provinces</h2>
-      <MapProvinces {...dataMap} />
+      <MapProvinces
+        {...dataMap}
+        styles={{
+          all: "red",
+          hover: "blue",
+          selected: "green",
+        }}
+      />
       <p>Provinces:</p>
       <pre className="w-[200px] h-[200px] text-sm overflow-scroll">
         {JSON.stringify(dataMap.provinces, null, 2)}

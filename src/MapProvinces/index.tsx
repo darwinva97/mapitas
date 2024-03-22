@@ -9,8 +9,15 @@ export const MapProvinces = ({
   json,
   availableProvinces,
   select,
+  styles,
   ...params
-}: TMapProvincesProps) => {
+}: TMapProvincesProps & {
+  styles: {
+    all: string;
+    hover: string;
+    selected: string;
+  }
+}) => {
   const nameRef = useRef<HTMLDivElement>(null);
   const selectedProvinces = params.province
     ? [params.province]
@@ -80,11 +87,7 @@ export const MapProvinces = ({
           id={id}
           availableProvinces={availableProvinces}
           selectedProvinces={selectedProvinces}
-          styles={{
-            all: "gray",
-            hover: "red",
-            selected: "blue",
-          }}
+          styles={styles}
         />
         <VectorMap
           {...json}
