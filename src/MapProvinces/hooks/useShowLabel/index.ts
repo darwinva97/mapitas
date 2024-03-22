@@ -5,10 +5,12 @@ export const useShowLabel = ({
   id,
   nameRef,
   availableProvinces,
+  active,
 }: {
   id: string;
   nameRef: React.RefObject<HTMLDivElement>;
   availableProvinces: TMapProvincesProps["availableProvinces"];
+  active: boolean;
 }) => {
   useEffect(() => {
     const svg = document.querySelector(
@@ -16,6 +18,7 @@ export const useShowLabel = ({
     )! as SVGSVGElement;
     const nameEl = nameRef.current! as HTMLDivElement;
     const handleMove = (e: MouseEvent) => {
+      if (!active) return;
       const path = e.target as SVGPathElement;
       if (path.nodeName !== "path") return;
 
@@ -41,6 +44,7 @@ export const useShowLabel = ({
       }
     };
     const handleLeave = () => {
+      if (!active) return;
       nameEl.style.display = "none";
     };
     svg.addEventListener("mousemove", handleMove);

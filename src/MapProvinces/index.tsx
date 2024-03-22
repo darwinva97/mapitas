@@ -3,6 +3,7 @@ import { useMapProvinces } from "./hooks";
 import { useId, useRef } from "react";
 import { Style } from "./style";
 import { useShowLabel } from "./hooks/useShowLabel";
+import { ShowNames } from "./components";
 
 export type TMapProvincesProps = ReturnType<typeof useMapProvinces>;
 
@@ -11,6 +12,7 @@ export const MapProvinces = ({
   availableProvinces,
   select,
   styles,
+  hoverLabel = false,
   ...params
 }: TMapProvincesProps & {
   styles: {
@@ -18,6 +20,7 @@ export const MapProvinces = ({
     hover: string;
     selected: string;
   };
+  hoverLabel?: boolean;
 }) => {
   const nameRef = useRef<HTMLDivElement>(null);
   const selectedProvinces = params.province
@@ -26,7 +29,7 @@ export const MapProvinces = ({
 
   const id = useId();
 
-  useShowLabel({ id, nameRef, availableProvinces });
+  useShowLabel({ id, nameRef, availableProvinces, active: hoverLabel });
 
   return (
     <>
@@ -58,6 +61,13 @@ export const MapProvinces = ({
               if (!provinceId) return;
               select(provinceId);
             },
+          }}
+        />
+        <ShowNames
+          availableProvinces={availableProvinces}
+          id={id}
+          style={{
+            fontSize: "12px",
           }}
         />
       </div>

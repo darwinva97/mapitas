@@ -5,6 +5,7 @@ import spain from "./assets/spain.json";
 const MapSimpleProvince = () => {
   const dataMap = useMapProvinces({
     json: spain,
+    idProvinces: ["es-s", "es-a"],
   });
   return (
     <div className="w-full max-w-[400px]">
