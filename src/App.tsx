@@ -50,6 +50,7 @@ const MapMultipleProvinces = () => {
 const App = () => {
   return (
     <div className="container py-6">
+      <div className="h-[900px]"></div>
       <h1 className="text-center mb-6 text-2xl">Map Provinces</h1>
       <div className="flex gap-4 justify-between">
         <MapSimpleProvince />

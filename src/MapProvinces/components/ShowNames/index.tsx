@@ -12,7 +12,10 @@ export const ShowNames = ({
 } & HTMLAttributes<HTMLDivElement>) => {
   useEffect(() => {
     const fn = () => {
-      const wrapper = document.querySelector(`[data-wrapper-map-id="${id}"]`);
+      const wrapper = document.querySelector(`[data-wrapper-map-id="${id}"]`)!;
+      const { top: topWrapper, left: leftWrapper } =
+        wrapper.getBoundingClientRect();
+
       wrapper?.querySelectorAll("path").forEach((path) => {
         const id = path.getAttribute("id")!;
         const isAvailable = availableProvinces.find((p) => p.id === id)!!;
@@ -21,12 +24,14 @@ export const ShowNames = ({
 
         const { top, left } = path.getBoundingClientRect();
 
+        topWrapper;
+
         const nameEl = wrapper.querySelector(`[data-map-province-id="${id}"]`);
 
         if (!nameEl || !(nameEl instanceof HTMLDivElement)) return;
 
-        nameEl.style.top = `${top}px`;
-        nameEl.style.left = `${left}px`;
+        nameEl.style.top = `${top - topWrapper}px`;
+        nameEl.style.left = `${left - leftWrapper}px`;
       });
     };
     fn();

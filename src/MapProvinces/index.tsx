@@ -33,7 +33,12 @@ export const MapProvinces = ({
 
   return (
     <>
-      <div data-wrapper-map-id={id}>
+      <div
+        data-wrapper-map-id={id}
+        style={{
+          position: "relative",
+        }}
+      >
         <div
           ref={nameRef}
           style={{
