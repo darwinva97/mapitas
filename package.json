@@ -1,7 +1,7 @@
 {
   "name": "mapitas",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.3",
   "type": "module",
   "main": "dist/mapitas.js",
   "types": "dist/lib/main.d.ts",
@@ -17,8 +17,9 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "@south-paw/react-vector-maps": "^3.2.0",
-    "@types/node": "^20.11.30",
+    "@south-paw/react-vector-maps": "^3.2.0"
+  },
+  "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

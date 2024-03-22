@@ -7,6 +7,9 @@ import dts from "vite-plugin-dts";
 export default defineConfig({
   plugins: [react(), dts({ include: ["lib"] })],
   build: {
+    rollupOptions:{
+      external: ["react", "react-dom"],
+    },
     copyPublicDir: false,
     lib: {
       entry: resolve(__dirname, "lib/main.ts"),
