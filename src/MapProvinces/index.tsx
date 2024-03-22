@@ -1,7 +1,8 @@
 import { VectorMap } from "@south-paw/react-vector-maps";
 import { useMapProvinces } from "./hooks";
-import { useEffect, useId, useRef } from "react";
+import { useId, useRef } from "react";
 import { Style } from "./style";
+import { useShowLabel } from "./hooks/useShowLabel";
 
 export type TMapProvincesProps = ReturnType<typeof useMapProvinces>;
 
@@ -16,7 +17,7 @@ export const MapProvinces = ({
     all: string;
     hover: string;
     selected: string;
-  }
+  };
 }) => {
   const nameRef = useRef<HTMLDivElement>(null);
   const selectedProvinces = params.province
@@ -25,48 +26,7 @@ export const MapProvinces = ({
 
   const id = useId();
 
-  useEffect(() => {
-    const svg = document.querySelector(
-      `[data-wrapper-map-id="${id}"]`
-    )! as SVGSVGElement;
-    const nameEl = nameRef.current! as HTMLDivElement;
-    const handleMove = (e: MouseEvent) => {
-      const path = e.target as SVGPathElement;
-      if (path.nodeName !== "path") return;
-
-      const id = path.getAttribute("id")!;
-
-      const availableProvince = availableProvinces.find((p) => p.id === id)!;
-
-      if (!availableProvince) return;
-
-      const name = path.getAttribute("name")!;
-
-      const x = e.clientX;
-      const y = e.clientY;
-
-      if (nameEl.innerText !== name) {
-        nameEl.innerText = name;
-      }
-
-      if (nameEl instanceof HTMLDivElement) {
-        nameEl.style.display = "block";
-        nameEl.style.top = `${y - 16}px`;
-        nameEl.style.left = `${x}px`;
-      }
-    };
-    const handleLeave = () => {
-      nameEl.style.display = "none";
-    };
-    svg.addEventListener("mousemove", handleMove);
-    svg.addEventListener("mouseenter", handleMove);
-    svg.addEventListener("mouseleave", handleLeave);
-    return () => {
-      svg.removeEventListener("mousemove", handleMove);
-      svg.removeEventListener("mouseenter", handleMove);
-      svg.removeEventListener("mouseleave", handleLeave);
-    };
-  }, []);
+  useShowLabel({ id, nameRef, availableProvinces });
 
   return (
     <>

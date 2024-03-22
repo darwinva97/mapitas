@@ -1,6 +1,15 @@
 import { useEffect } from "react";
+import { TMapProvincesProps } from "../..";
 
-export const useShowLabel = (id: string, ) => {
+export const useShowLabel = ({
+  id,
+  nameRef,
+  availableProvinces,
+}: {
+  id: string;
+  nameRef: React.RefObject<HTMLDivElement>;
+  availableProvinces: TMapProvincesProps["availableProvinces"];
+}) => {
   useEffect(() => {
     const svg = document.querySelector(
       `[data-wrapper-map-id="${id}"]`
